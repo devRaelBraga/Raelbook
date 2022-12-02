@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
+    <script src="cadastro.js"></script>
+    <title>Raelbook - cadastro</title>
+</head>
+<body>
+    <div id="login">
+        <h1>raelbook</h1>
+        <input id="nome" type="text" placeholder="digite seu nome...">
+        <input id="senha" type="text" placeholder="digite sua senha...">
+        <input id="email" type="text" placeholder="email@email.com">
+        <input id="nascimento" type="date" placeholder="00/00/0000">
+        <button onclick="cadastro()"> CADASTRAR </button>
+    </div>
+</body>
+<style>
+    input, button {
+        display: flex;
+        margin-top: 5px;
+        height: 40px;
+        width: 234px;
+    }
+
+    input {
+        padding-left: 10px;
+    }
+
+    button {
+        width: 250px;
+        background-color: #3b5998;;
+        color: aliceblue;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: large;
+        padding-left: 28%;
+    }
+    h1 {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: x-large;
+        margin-bottom: 5px;
+    }
+
+    #login {
+        margin-top: 15%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+    }
+    body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+</style>
+</html>

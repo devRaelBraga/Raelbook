@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+html{
+    background-color: rgb(217, 217, 217);
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 5vh;
+    scroll-behavior: smooth;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    background-color: #3b5998;
+    color: aliceblue;
+    height: 5vh;
+    font-size: xx-large;
+    padding: 2vh;
+    padding-left: 3vw;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 50vw;
+    margin-left: 15vw;
+    margin-top: 2vh;
+}
+
+.post {
+    display: flex;
+    background-color: aliceblue;
+    margin-top: 3vh;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 3%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.174), -1px -1px 5px rgba(0, 0, 0, 0.371);
+}
+
+.post-img{
+    display: contents;
+}
+
+.pfp .postdata {
+    font-size: 0.8em;
+}
+
+.post-text{
+    margin-bottom: 0.5vh;
+    background-color: aliceblue;
+    width: 100%;
+}
+.post-text p{
+    word-wrap: break-word;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    padding-left: 4%;
+    padding-right: 5%;
+    line-height: 1.2em;
+    font-weight: 500;
+}
+
+.post-img img{
+    width: 100%;
+    height: max-content;
+}
+
+.pfp {
+    padding-left: 3%;
+    width: 100%;
+    display: flex;
+}
+.pfp p{
+    font-size: 1.2em;
+}
+
+.pfp img{
+    margin-left: 3vh;
+    height: 6vh;
+    border-radius: 50%;
+}
+
+.info-post {
+    margin-left: 1.2vw;
+    margin-top: 0.7vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.5vh;
+}
+
+.post-reactions, .post-like, .post-comment{
+    display: flex;
+    align-items: center;
+}
+
+.post-reactions {
+    margin-top: 2vh;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.post-like, .post-comment {
+    cursor: pointer;
+}
+
+
+.post-like img{
+    width: 3vw;
+}
+.post-comment img{
+    width: 3vw;
+}
+
+.post-like p, .post-comment p{
+    margin-left: 1vw;
+}
