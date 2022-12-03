@@ -12,40 +12,21 @@
 </head>
 <header>
     <h1>raelbook</h1>
+    <div onclick="toPerfil()">
+        <img class="pfp-img">
+        <p class="pfp-name">s</p>
+    </div>
 </header>
 <body>
     <div class="container">
     </div>
 </body>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
-    inicio()
+    async function toPerfil(){
+        await new Promise(r => setTimeout(r, 1000));
+        window.location.replace("./perfil.html");
+    }
+    inicio();
 </script>
 </html>

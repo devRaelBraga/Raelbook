@@ -9,7 +9,8 @@ async function cadastro(){
          "name": document.querySelector("#nome").value,
          "senha": document.querySelector("#senha").value,
          "email": document.querySelector("#email").value,
-         "nascimento": document.querySelector("#nascimento").value,
+         "foto": document.querySelector("#foto").value,
+         "nascimento": document.querySelector("#nascimento").value
        });
        
        let response = await fetch("http://localhost:3005/user/create", { 
@@ -20,6 +21,6 @@ async function cadastro(){
        
        let data = await response.text();
        await new Promise(r => setTimeout(r, 2000));
-        window.location.replace("./index.html");
+        window.location.replace("./login.html");
 
 }

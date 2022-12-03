@@ -17,11 +17,14 @@ async function inicio(){
 
     let data = await response.json();
 
+    //Criar os posts pegando do banco de dados
     data.forEach(element => {
         criarPost(element.foto, element.texto, element.id_autor, element.id)
     });
-}
 
+    nsei();
+
+}
 
 async function criarPost(foto, texto, id_autor, idpost){
     // CRIAR A DIV DO   POST
@@ -118,14 +121,7 @@ async function criarPost(foto, texto, id_autor, idpost){
 
     divpai.appendChild(divreactions);
     container.appendChild(divpai);
-
-    getDate(1);
 }
-
-
-
-
-
 
 async function getPhoto(id){
     let headersList = {
@@ -195,4 +191,39 @@ async function getDate(id){
 
     
     return data;
+}
+
+async function getPfp(){
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Content-Type": "application/json"
+   }
+   
+   let bodyContent = JSON.stringify({
+     "token": localStorage.getItem("token")
+   });
+   
+   let response = await fetch("http://localhost:3005/user/get", { 
+     method: "POST",
+     body: bodyContent,
+     headers: headersList
+   });
+   
+   let data = await response.text();
+   data = await JSON.parse(data);
+
+   return JSON.stringify({
+    "foto": data.foto,
+    "name": data.name
+  });
+}
+
+async function nsei(){
+    const img = document.querySelector(".pfp-img");
+    const name = document.querySelector(".pfp-name");
+    const dados = await JSON.parse(await getPfp());
+
+    img.src = dados.foto;
+    name.innerHTML = dados.name
 }
