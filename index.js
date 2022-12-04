@@ -1,28 +1,38 @@
 async function inicio(){
-    let headersList = {
-        "Accept": "*/*",
-        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-        "Content-Type": "application/json"
+    if((await verifyLogin()) != 401){  //VERIFICA SE O USUARIO ESTÁ LOGADO COM UM TOKEN VÁLIDO
+      id_autor = arguments.length > 0 ? arguments[0] : "c9315519-6ffc-4e82-b1bc-e55e784e15da";
+      let headersList = {
+          "Accept": "*/*",
+          "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+          "Content-Type": "application/json"
+      }
+  
+      let bodyContent = JSON.stringify({
+          "id_autor": id_autor
+      });
+  
+      let response = await fetch("http://localhost:3005/post/get", { 
+          method: "POST",
+          body: bodyContent,
+          headers: headersList
+      });
+  
+      let data = await response.json();
+  
+      //Criar os posts pegando do banco de dados
+      data.reverse().forEach(element => {
+          criarPost(element.foto, element.texto, element.id_autor, element.id)
+      });
+
+      post();
+  
+      nsei();
     }
 
-    let bodyContent = JSON.stringify({
-        "id_autor": "c9315519-6ffc-4e82-b1bc-e55e784e15da"
-    });
-
-    let response = await fetch("http://localhost:3005/post/get", { 
-        method: "POST",
-        body: bodyContent,
-        headers: headersList
-    });
-
-    let data = await response.json();
-
-    //Criar os posts pegando do banco de dados
-    data.forEach(element => {
-        criarPost(element.foto, element.texto, element.id_autor, element.id)
-    });
-
-    nsei();
+    else{  //SE O USUARIO NAO ESTIVER LOGADO, REDIRECIONA PARA A PÁGINA DE LOGIN
+        await new Promise(r => setTimeout(r, 500));
+        window.location.replace("./login.html");
+    }
 
 }
 
@@ -169,7 +179,7 @@ async function getName(id){
        return data
 }
 
-async function getDate(id){
+async function getDate(id){  //RETORNA A DATA QUE O POST FOI CRIADO
     let headersList = {
       "Accept": "*/*",
       "User-Agent": "Thunder Client (https://www.thunderclient.com)",
@@ -193,7 +203,7 @@ async function getDate(id){
     return data;
 }
 
-async function getPfp(){
+async function getPfp(){ //RETORNA UM JSON COM FOTO E NOME
   let headersList = {
     "Accept": "*/*",
     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
@@ -226,4 +236,34 @@ async function nsei(){
 
     img.src = dados.foto;
     name.innerHTML = dados.name
+}
+
+async function verifyLogin(){
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Content-Type": "application/json"
+   }
+   
+   let bodyContent = JSON.stringify({
+     "token": localStorage.getItem("token")
+   });
+   
+   let response = await fetch("http://localhost:3005/user/get", { 
+     method: "POST",
+     body: bodyContent,
+     headers: headersList
+   });
+   
+   let data = response.status;
+   
+   return data;
+}
+
+async function post(){
+    var data = JSON.parse(await getPfp());
+
+    document.querySelector("#userphoto").src = data.foto
+    document.querySelector("#username").innerHTML = data.name
+
 }
