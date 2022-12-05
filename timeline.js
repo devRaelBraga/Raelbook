@@ -8,10 +8,10 @@ async function inicio(){
       }
   
       let bodyContent = JSON.stringify({
-          "id_autor": id_autor
+          "token": localStorage.getItem("token")
       });
   
-      let response = await fetch("http://localhost:3005/post/getbyid", { 
+      let response = await fetch("http://localhost:3005/post/get", { 
           method: "POST",
           body: bodyContent,
           headers: headersList
@@ -289,4 +289,10 @@ async function postar(){
    
    let data = await response.text();
    console.log(data);
+}
+
+async function logout(){
+  localStorage.removeItem("token")
+  await new Promise(r => setTimeout(r, 1000));
+  window.location.replace("./login.html");
 }

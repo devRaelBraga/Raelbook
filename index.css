@@ -3,9 +3,9 @@
 html{
     background-color: rgb(217, 217, 217);
     font-family: 'Montserrat', sans-serif;
-    padding-bottom: 5vh;
     scroll-behavior: smooth;
 }
+
 
 header{
     display: flex;
@@ -16,7 +16,7 @@ header{
     font-size: xx-large;
     padding: 2vh;
     padding-left: 3vw;
-    padding-right: 3vw;
+    padding-right: 2vw;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -25,17 +25,21 @@ header div{
     display: flex;
     gap: 1vw;
     font-size: 20px;
+    align-items: center;
 }
 
 header img{
+    margin-left: 2.5vw;
+    width: 30px;
+    height: max-content;
+}
+
+.pfp-img {
     width: 35px;
     height: max-content;
     border-radius: 50%;
 }
 
-header p{
-    margin-top: 7px;
-}
 
 .container {
     display: flex;
@@ -47,15 +51,48 @@ header p{
 
 #createpost-text{
     width: 100%;
+    padding-left: 4vw;
+    margin-top: 3vh;
+    margin-bottom: 1.5vh;
+    display: flex;
+    flex-direction: column;
+}
+#createpost-text div{
+    margin-top: 1vh;
+    margin-bottom: 2vh;
 }
 
 #mensagem-post{
-    padding-left: 2vw;
-    width: 95%;
-    height: 80px;
+    width: 90%;
+    height: 40px;
     word-wrap: break-word;
     background-color: aliceblue;
     border: none;
+    outline: none;
+    resize: none;
+}
+
+#button{
+    width: 100%;
+}
+
+.botaoenviar{
+    box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.174);
+    cursor: pointer;
+    padding-top: 3vh;
+    font-size: 2.5vh;
+    width: 100%;
+    background-color: aliceblue;
+    border: none;
+    outline: none;
+    padding-bottom: -2vh;
+}
+
+.linkfoto{
+    background-color: aliceblue;
+    border: none;
+    outline: none;
+    width: 80%;
 }
 
 .post {
@@ -154,4 +191,33 @@ header p{
 
 .post-like p, .post-comment p{
     margin-left: 1vw;
+}
+
+footer{
+    margin-top: 5vh;
+    display: flex;
+    justify-content: space-between;
+    background-color: #3b5998;
+    color: aliceblue;
+    height: 5vh;
+    font-size: x-large;
+    padding: 2vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    font-family: 'Montserrat', sans-serif;
+    align-items: center;
+}
+
+footer a{
+    font-size: medium;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+}
+
+footer a img{
+    margin-right: 0.3vw;
+    width: 30px;
+    height: max-content;
 }

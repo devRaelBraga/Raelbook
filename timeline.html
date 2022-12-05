@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script>
+    <script src="timeline.js"></script>
     <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
     <title>Raelbook</title>
 </head>
 <header>
     <h1>raelbook</h1>
-    <div onclick="toPerfil()">
-        <img class="pfp-img">
-        <p class="pfp-name">s</p>
+    <div>
+        <img class="pfp-img" onclick="toPerfil()">
+        <p class="pfp-name" onclick="toPerfil()">s</p>
+        <img src="./img/logout.png" alt="" onclick="logout()">
     </div>
 </header>
 <body>
@@ -40,10 +41,14 @@
         </div>
     </div>
 </body>
+<footer>
+    <h2>raelbook</h2>
+    <a href="https://github.com/devRaelBraga"><img src="./img/github.png">devRaelBraga</a>
+</footer>
 
 <script>
     async function toPerfil(){
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 500));
         window.location.replace("./perfil.html");
     }
     inicio();
