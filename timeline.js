@@ -100,6 +100,7 @@ async function criarPost(foto, texto, id_autor, idpost){
     // DIV INTERNA DO LIKE
     var divlike = document.createElement("div");
     divlike.classList.add("post-like");
+    divlike.addEventListener("click", this.like(idpost))
     divreactions.appendChild(divlike);
 
 
@@ -295,4 +296,48 @@ async function logout(){
   localStorage.removeItem("token")
   await new Promise(r => setTimeout(r, 1000));
   window.location.replace("./login.html");
+}
+
+async function like(post){
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Content-Type": "application/json"
+   }
+   
+   let bodyContent = JSON.stringify({
+     "token": localStorage.getItem("token"),
+     "id_post": post
+   });
+   
+   let response = await fetch("http://localhost:3005/post/like", { 
+     method: "POST",
+     body: bodyContent,
+     headers: headersList
+   });
+   
+   let data = await response.text();
+   console.log(data);   
+}
+
+async function dislike(){
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Content-Type": "application/json"
+   }
+   
+   let bodyContent = JSON.stringify({
+     "token": localStorage.getItem("token"),
+     "id_post": 1
+   });
+   
+   let response = await fetch("http://localhost:3005/post/dislike", { 
+     method: "DELETE",
+     body: bodyContent,
+     headers: headersList
+   });
+   
+   let data = await response.text();
+   console.log(data);   
 }
