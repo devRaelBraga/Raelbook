@@ -21,6 +21,7 @@ async function cadastro(){
        
        let data = await response.text();
        await new Promise(r => setTimeout(r, 2000));
+       localStorage.removeItem("token");
         window.location.replace("./login.html");
 
 }

@@ -28,11 +28,13 @@ async function CarregarPerfil(){
         let foto = document.querySelector("#foto");
         let email = document.querySelector("#email");
         let id = document.querySelector("#id");
+        let link = document.querySelector(".link");
     
         nome.innerHTML = data.name;
         foto.src = data.foto;
         email.innerHTML = data.email;
         id.innerHTML = data.nascimento;
+        link.innerHTML = "Publicações de "+ data.name;
     }
 
     else{

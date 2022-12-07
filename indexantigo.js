@@ -8,10 +8,10 @@ async function inicio(){
       }
   
       let bodyContent = JSON.stringify({
-          "token": localStorage.getItem("token")
+          "id_autor": id_autor
       });
   
-      let response = await fetch("http://localhost:3005/post/get", { 
+      let response = await fetch("http://localhost:3005/post/getbyid", { 
           method: "POST",
           body: bodyContent,
           headers: headersList
@@ -55,9 +55,7 @@ async function criarPost(foto, texto, id_autor, idpost){
     // DIV DA IMAGEM DO POST
     var divimg = document.createElement("div");
     divimg.classList.add("post-img");
-    if(foto){
-      divpai.appendChild(divimg);
-    }
+    divpai.appendChild(divimg);
 
     // DIV DA PARTE DE LIKE E COMENTÁRIO
     var divreactions = document.createElement("div");
@@ -102,30 +100,17 @@ async function criarPost(foto, texto, id_autor, idpost){
     // DIV INTERNA DO LIKE
     var divlike = document.createElement("div");
     divlike.classList.add("post-like");
-    var msg = "togglelike(" + idpost + ")";
-    divlike.setAttribute("onclick", msg);
     divreactions.appendChild(divlike);
 
 
     // ELEMENTO LIKE
     var like = document.createElement("img");
-    like.classList.add("likeimg"+idpost);
-    if(await postLiked(idpost) == true){
-      like.src = "./img/liked.png";
-    }
-    else{
-      like.src = "./img/like.png";
-    }
+    like.src = "./img/like.png";
     divlike.appendChild(like);
 
     // ELEMENTO DO TEXTO DO LIKE
     var liketext = document.createElement("p");
-    if(await postLiked(idpost) == true){
-      liketext.innerHTML ="(" + await howManyLikes(idpost) + ") Curtido";
-    }
-    else{
-      liketext.innerHTML ="(" + await howManyLikes(idpost) + ") Curtir";
-    }
+    liketext.innerHTML = "Curtir";
     divlike.appendChild(liketext);
 
     // DIV INTERNA DO COMENTARIO
@@ -304,105 +289,4 @@ async function postar(){
    
    let data = await response.text();
    console.log(data);
-}
-
-async function logout(){
-  localStorage.removeItem("token")
-  await new Promise(r => setTimeout(r, 1000));
-  window.location.replace("./login.html");
-}
-
-async function togglelike(post){
-  if(await postLiked(post) == true){
-    let headersList = {
-      "Accept": "*/*",
-      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-      "Content-Type": "application/json"
-    }
-     
-    let bodyContent = JSON.stringify({
-      "token": localStorage.getItem("token"),
-      "id_post": post
-    });
-     
-    let response = await fetch("http://localhost:3005/post/dislike", { 
-      method: "DELETE",
-      body: bodyContent,
-      headers: headersList
-    });
-    console.log("deslikou");
-    const likeimg = document.querySelector(".likeimg"+ post);
-    likeimg.src = "./img/like.png"
-  }
-  
-  else{
-    let headersList = {
-      "Accept": "*/*",
-      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-      "Content-Type": "application/json"
-     }
-     
-     let bodyContent = JSON.stringify({
-       "token": localStorage.getItem("token"),
-       "id_post": post
-     });
-     
-     let response = await fetch("http://localhost:3005/post/like", { 
-       method: "POST",
-       body: bodyContent,
-       headers: headersList
-     });
-
-       
-    const likeimg = document.querySelector(".likeimg"+ post);
-    likeimg.src = "./img/liked.png"
-  }
-
-}
-
-async function postLiked(post){
-  let headersList = {
-    "Accept": "*/*",
-    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-    "Content-Type": "application/json"
-   }
-   
-   let bodyContent = JSON.stringify({
-    "token": localStorage.getItem("token"),
-    "id_post": post
-   });
-   
-   let response = await fetch("http://localhost:3005/post/postliked?", { 
-     method: "POST",
-     body: bodyContent,
-     headers: headersList
-   });
-   
-   let data = JSON.parse(await response.text());
-   if(data.mensagem == "Likado"){
-    return true
-   }
-   return false
-}
-
-async function howManyLikes(post){
-  let headersList = {
-    "Accept": "*/*",
-    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-    "Content-Type": "application/json"
-   }
-   
-   let bodyContent = JSON.stringify({
-    "token": localStorage.getItem("token"),
-    "id_post": post
-   });
-   
-   let response = await fetch("http://localhost:3005/post/getlikeammount", { 
-     method: "POST",
-     body: bodyContent,
-     headers: headersList
-   });
-   
-   let data = JSON.parse(await response.text());
-   return data.likeammount
 }

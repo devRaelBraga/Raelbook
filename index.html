@@ -11,7 +11,7 @@
     <title>Raelbook</title>
 </head>
 <header>
-    <h1>raelbook</h1>
+    <h1 onclick="toInicio()">raelbook</h1>
     <div onclick="toPerfil()">
         <img class="pfp-img">
         <p class="pfp-name">s</p>
@@ -45,6 +45,10 @@
     async function toPerfil(){
         await new Promise(r => setTimeout(r, 1000));
         window.location.replace("./perfil.html");
+    }
+    async function toInicio(){
+        await new Promise(r => setTimeout(r, 500));
+        window.location.replace("./timeline.html");
     }
     inicio();
 </script>
